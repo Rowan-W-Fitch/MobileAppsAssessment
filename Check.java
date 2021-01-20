@@ -11,9 +11,9 @@ class Check{
     this.customer = c;
     this.robot = r;
     this.rest = rt;
-    this.total = 0.0
+    this.total = 0.0;
     this.isPaid = false;
-    
+
   }
 
 }

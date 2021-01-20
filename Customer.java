@@ -16,7 +16,7 @@ class Customer{
       return;
     }
     c.isPaid = true;
-    this.r.balance += c.total;
+    this.rest.balance += c.total;
 
   }
 
