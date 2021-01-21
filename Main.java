@@ -22,6 +22,19 @@ class Main{
 
   }
 
+  public static void takeOrder(String[] menu, int choice, Customer customer, Scanner sc, Check check){
+    showMenu(menu);
+    System.out.println("enter the number of the item you would like");
+    choice = sc.nextInt();
+    while(choice != 1 && choice != 2 && choice != 3){
+      System.out.println("please enter one of the numbers on the menu");
+      choice = sc.nextInt();
+    }
+    String[] itm = parseItem(menu[choice-1]);
+    System.out.println("Aaah, the "+ itm[0]+", excellent choice!");
+    customer.waiter.addItem(check, itm[0], Double.parseDouble(itm[1]));
+  }
+
   public static void main(String[] args){
 
     //create restaurant
@@ -57,11 +70,20 @@ class Main{
     //display menu + take order
     System.out.println("Hello, I am Robot " + customer.waiter.serial + ", what may I get for you today?");
     Check check = customer.waiter.openCheck(customer);
-    showMenu(menu);
-    String done = "n";
-    
-
-
+    while(true){
+      takeOrder(menu, choice, customer, sc, check);
+      sc.nextLine();
+      System.out.println("would you like anything else? (type n if you would like to close your check)");
+      String done = sc.nextLine();
+      if(done.equals("n")){
+        break;
+      }
+    }
+    //pay
+    double cost = check.total;
+    System.out.println("great! please pay the bill and then I will bring your food, your total is $"+cost);
+    customer.payCheck(check);
+    System.out.println("I hope you enjoyed your meal! Have a great rest of your evening :)");
   }
 
 }
